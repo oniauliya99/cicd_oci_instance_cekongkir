@@ -153,6 +153,7 @@ jobs:
             sudo firewall-cmd --zone=docker --add-service=http --permanent
             sudo firewall-cmd --reload
             sudo docker-compose up -d
+            sudo docker exec -i rajaongkir bash -c "chmod -R 777 /var/www/html/storage/ \chown -R www-data:www-data ."
             sudo docker exec -i rajaongkir bash -c '
             if [ ! -f .env ]; then
             cp .env.example .env
@@ -160,8 +161,6 @@ jobs:
             mysql -u ${{secrets.DB_USERNAME}} -p${{secrets.DB_PASSWORD}} -h ${{env.MySQL_IP}} -e "CREATE DATABASE IF NOT EXISTS rajaongkir;"
             echo -e "DB_HOST=${{env.MySQL_IP}}\nDB_USERNAME=${{secrets.DB_USERNAME}}\nDB_PASSWORD=${{secrets.DB_PASSWORD}}" >> .env
             echo -e "RAJAONGKIR_API_KEY=${{secrets.RAJAONGKIR_API_KEY}}" >> .env
-            chmod -R 777 /var/www/html/storage/
-            chown -R www-data:www-data *
             composer install
             php artisan key:generate
             php artisan migrate
