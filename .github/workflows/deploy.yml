@@ -162,12 +162,10 @@ jobs:
             echo -e "RAJAONGKIR_API_KEY=${{secrets.RAJAONGKIR_API_KEY}}" >> .env
             composer install
             php artisan key:generate
-            php artisan migrate
+            php artisan migrate:fresh --seed
             fi '
             sudo docker exec -i rajaongkir bash -c '
             file=`mysql -u ${{secrets.DB_USERNAME}} -p${{secrets.DB_PASSWORD}} -h ${{env.MySQL_IP}} rajaongkir -e "SELECT COUNT(*) as count FROM users"  | cut -d \t -f 2`
             if [ $file == "0" ]; then
-            php artisan db:seed --class=LocationSeeder
-            php artisan db:seed --class=UserSeeder
             fi '
 
