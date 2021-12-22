@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   system_sales:
-    image: oniauliya/cicd_oci_instance_mysqldb
+    image: oniauliya99/cicd_oci_instance_mysqldb
     container_name: rajaongkir
     ports:
       - 80:80
