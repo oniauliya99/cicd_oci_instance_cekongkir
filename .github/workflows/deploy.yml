@@ -161,6 +161,7 @@ jobs:
             echo -e "DB_HOST=${{env.MySQL_IP}}\nDB_USERNAME=${{secrets.DB_USERNAME}}\nDB_PASSWORD=${{secrets.DB_PASSWORD}}" >> .env
             echo -e "RAJAONGKIR_API_KEY=${{secrets.RAJAONGKIR_API_KEY}}" >> .env
             chmod -R 777 /var/www/html/storage/
+            chown -R www-data:www-data *
             composer install
             php artisan key:generate
             php artisan migrate
