@@ -32,4 +32,4 @@ RUN a2dissite 000-default.conf; \
     a2enmod rewrite
 
 COPY . .
-RUN chmod 777 /var/www/html/storage/logs/laravel.log
+
